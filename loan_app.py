@@ -1,4 +1,5 @@
-from flask import Flask,request
+from flask import Flask
+from flask import request
 import pickle
 
 app=Flask(__name__)
@@ -12,11 +13,11 @@ clf=pickle.load(model_pickle)
 
 @app.route("/predict", methods=["POST"])# It is a post request as user needs to input data to get output 
 def predictions(): #and it expects input in the form of json i.e key value pair
-    loan_req= request.get_json
+    loan_req= request.get_json()#Correction made added parenthesis
 
     if loan_req["Gender"]=="Male":
         Gender=0
-    elif loan_req["Gender"]=="Female":
+    else:
         Gender=1
 
     if loan_req["Married"]=="Unmarried":
