@@ -1,0 +1,30 @@
+name: Continuous integration of the Loan API
+
+on:
+    push:
+      branches:
+        - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: giving access of repository to workflow
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: 3.9
+
+      - name: Install Dependencies
+        run: |
+            python3 -m pip install --upgrade pip
+            pip install pytest
+            pip install -r requirements.txt
+
+      - name: Running test with Pytest
+        run: pytest
+
+
+      
